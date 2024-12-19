@@ -1,0 +1,33 @@
+server:
+  port: 8080
+  servlet:
+    context-path: /api
+    session:
+      timeout: PT60M
+spring:
+  mvc:
+    throw-exception-if-no-handler-found: true
+  web:
+    resources:
+      add-mappings: false
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    username: root
+    password: 1234
+    url: jdbc:mysql://localhost:3306/study?useUnicode=true&characterEncoding=utf-8&allowMultiQueries=true&useSSL=false&serverTimezone=GMT%2b8&allowPublicKeyRetrieval=true
+  servlet:
+    multipart:
+      max-file-size: 100MB
+      max-request-size: 100MB
+  mail:
+    host: smtp.qq.com
+    port: 465
+    username: 1261408331@qq.com
+    password: dcuperhvfaulffid
+    default-encoding: UTF-8
+    properties:
+      mail:
+        smtp:
+          socketFactory: javax.net.ssl.SSLSocketFactory
+      debug: true
+    protocol: smtps
