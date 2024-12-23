@@ -6,19 +6,19 @@ import org.apache.commons.lang3.RandomStringUtils;
 public class StringUtils {
     /**
      * 生成随机数
-     * @param count 位数
+     * @param length 长度
      * @return 随机数
      */
-    public static String getRandomNumber(Integer count) {
-        return RandomStringUtils.random(count, false, true);
+    public static String getRandomNumber(Integer length) {
+        return RandomStringUtils.random(length, false, true);
     }
     /**
      * 生成随机码
-     * @param count
-     * @return
+     * @param length 长度
+     * @return 随机码
      */
-    public static String getRandomString(Integer count){
-        return RandomStringUtils.random(count,true,true);
+    public static String getRandomString(Integer length){
+        return RandomStringUtils.random(length,true,true);
     }
 
 }
