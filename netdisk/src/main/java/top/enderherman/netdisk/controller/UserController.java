@@ -1,12 +1,18 @@
 package top.enderherman.netdisk.controller;
 
+import jakarta.annotation.Resource;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-import top.enderherman.netdisk.common.constants.Constants;
+import top.enderherman.netdisk.common.BaseResponse;
+import top.enderherman.netdisk.common.Constants;
+import top.enderherman.netdisk.exception.BusinessException;
+import top.enderherman.netdisk.service.EmailCodeService;
 import top.enderherman.netdisk.utils.ImageGenerator;
 
 import java.io.IOException;
@@ -17,9 +23,12 @@ import java.io.IOException;
 @Slf4j
 @RestController
 @RequestMapping("accountController")
-public class UserController {
+public class UserController extends BaseController {
 
-    @RequestMapping("/checkCode")
+    @Autowired
+    private EmailCodeService emailCodeService;
+
+    @GetMapping("/checkCode")
     public void checkCode(HttpServletResponse response, HttpSession session, Integer type) {
         try {
             //1.生成图片
@@ -31,6 +40,7 @@ public class UserController {
             response.setContentType("image/jpeg");
             //3.存储验证码到session中
             String code = imageGenerator.getCode();
+            //图片验证码是登录用的
             if (type == null || type == 0) {
                 session.setAttribute(Constants.CHECK_CODE_KEY, code);
             } else {
@@ -41,6 +51,20 @@ public class UserController {
         } catch (IOException e) {
             log.error("error Is:", e);
             response.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
+        }
+    }
+
+    @PostMapping("/sendEmailCode")
+    public BaseResponse<String> sendEmailCode(HttpSession session, String email, String checkCode, Integer type) {
+        try {
+            //1.校验图片验证码
+            if (!checkCode.equalsIgnoreCase((String) session.getAttribute(Constants.CHECK_CODE_KEY_EMAIL)))
+                throw new BusinessException("图片验证码错误");
+            emailCodeService.sendEmailCode(email,type);
+            return getSuccessResponse(null);
+        } finally {
+            //设置本次图片验证码失效
+            session.removeAttribute(Constants.CHECK_CODE_KEY_EMAIL);
         }
     }
 
