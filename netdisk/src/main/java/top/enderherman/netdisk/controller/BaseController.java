@@ -2,7 +2,7 @@ package top.enderherman.netdisk.controller;
 
 import top.enderherman.netdisk.common.BaseResponse;
 import top.enderherman.netdisk.entity.enums.ResponseCodeEnum;
-import top.enderherman.netdisk.exception.BusinessException;
+import top.enderherman.netdisk.common.exceptions.BusinessException;
 
 /**
  * @author Enderherman

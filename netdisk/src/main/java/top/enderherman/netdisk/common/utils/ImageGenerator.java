@@ -1,4 +1,4 @@
-package top.enderherman.netdisk.utils;
+package top.enderherman.netdisk.common.utils;
 
 import javax.imageio.ImageIO;
 import java.awt.*;

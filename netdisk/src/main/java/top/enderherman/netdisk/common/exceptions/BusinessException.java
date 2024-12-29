@@ -1,4 +1,4 @@
-package top.enderherman.netdisk.exception;
+package top.enderherman.netdisk.common.exceptions;
 
 import top.enderherman.netdisk.entity.enums.ResponseCodeEnum;
 

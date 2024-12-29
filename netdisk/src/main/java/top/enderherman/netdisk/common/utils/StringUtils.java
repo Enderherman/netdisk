@@ -1,4 +1,4 @@
-package top.enderherman.netdisk.utils;
+package top.enderherman.netdisk.common.utils;
 
 import org.apache.commons.lang3.RandomStringUtils;
 

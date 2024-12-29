@@ -1,6 +1,5 @@
 package top.enderherman.netdisk.controller;
 
-import jakarta.annotation.Resource;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 import lombok.extern.slf4j.Slf4j;
@@ -10,10 +9,10 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import top.enderherman.netdisk.common.BaseResponse;
-import top.enderherman.netdisk.common.Constants;
-import top.enderherman.netdisk.exception.BusinessException;
+import top.enderherman.netdisk.common.constants.Constants;
+import top.enderherman.netdisk.common.exceptions.BusinessException;
 import top.enderherman.netdisk.service.EmailCodeService;
-import top.enderherman.netdisk.utils.ImageGenerator;
+import top.enderherman.netdisk.common.utils.ImageGenerator;
 
 import java.io.IOException;
 
