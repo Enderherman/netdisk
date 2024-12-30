@@ -8,7 +8,7 @@ import java.io.Serializable;
 
 @Data
 @JsonIgnoreProperties(ignoreUnknown = true)
-public class EmailConfig implements Serializable {
+public class SystemConfig implements Serializable {
     private String registerEmailTitle = "欢迎使用原梦云";
     private String registerEmailContent = "您好, 您的验证码为: %s, 15分钟有效";
     /**

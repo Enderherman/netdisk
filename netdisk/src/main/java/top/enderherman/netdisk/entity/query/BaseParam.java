@@ -9,5 +9,9 @@ public class BaseParam {
     private Integer pageSize;
     private String orderBy;
 
+    public SimplePage getSimplePage() {
+        return simplePage;
+    }
+
 
 }

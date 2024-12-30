@@ -11,9 +11,9 @@ import top.enderherman.netdisk.common.exceptions.BusinessException;
  */
 public class BaseController {
 
-    private static final String STATUS_SUCCESS = "success";
+    protected static final String STATUS_SUCCESS = "success";
 
-    private static final String STATUS_ERROR = "error";
+    protected static final String STATUS_ERROR = "error";
 
     /**
      * 响应成功

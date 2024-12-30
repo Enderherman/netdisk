@@ -21,7 +21,7 @@
     </sql>
 
     <insert id="insert" parameterType="top.enderherman.netdisk.entity.pojo.EmailCode">
-        insert into email_code
+        insert into netdisk.email_code
         <trim prefix="(" suffix=")" suffixOverrides=",">
             <if test="bean.email != null">
                 email,

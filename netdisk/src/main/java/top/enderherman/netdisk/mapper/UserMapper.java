@@ -7,4 +7,6 @@ import top.enderherman.netdisk.entity.pojo.User;
 @Mapper
 public interface UserMapper<T, P> extends BaseMapper<T, P> {
     T selectByEmail(@Param("email") String email);
+
+    T selectByNickName(@Param("nickName") String nickName);
 }

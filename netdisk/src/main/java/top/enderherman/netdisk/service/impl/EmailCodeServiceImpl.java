@@ -10,7 +10,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import top.enderherman.netdisk.common.component.RedisComponent;
 import top.enderherman.netdisk.common.config.AppConfig;
-import top.enderherman.netdisk.common.config.EmailConfig;
+import top.enderherman.netdisk.common.config.SystemConfig;
 import top.enderherman.netdisk.common.constants.Constants;
 import top.enderherman.netdisk.entity.pojo.EmailCode;
 import top.enderherman.netdisk.entity.pojo.User;
@@ -63,13 +63,17 @@ public class EmailCodeServiceImpl implements EmailCodeService {
 
         //1.获取验证码
         String code = StringUtils.getRandomNumber(Constants.LENGTH_5);
+
         //2.发送验证码给用户
         send(email, code);
 
         //3.设置之前验证码为过期
+        emailCodeMapper.disableEmailCode(email);
+
         //4.存储验证码
-        EmailCode emailCode = new EmailCode(code, email, new Date(), Constants.ZERO);
+        EmailCode emailCode = new EmailCode(email, code, new Date(), Constants.ZERO);
         emailCodeMapper.insert(emailCode);
+
     }
 
 
@@ -79,15 +83,20 @@ public class EmailCodeServiceImpl implements EmailCodeService {
             MimeMessageHelper helper = new MimeMessageHelper(message, true);
             //1.设置发送人
             helper.setFrom(appConfig.getSendUserName());
+            helper.setTo(toEmail);
             //2.设置发送主题
-            EmailConfig emailConfig = redisComponent.getEmailConfig();
-            helper.setSubject(emailConfig.getRegisterEmailTitle());
+            System.out.println("1.开始时间："+new Date());
+            SystemConfig systemConfig = redisComponent.getSystemConfig();
+            System.out.println("2.redis操作完成时间："+new Date());
+            helper.setSubject(systemConfig.getRegisterEmailTitle());
             //3.设置发送内容
-            helper.setText(String.format(emailConfig.getRegisterEmailContent(), code));
+            helper.setText(String.format(systemConfig.getRegisterEmailContent(), code));
             //4.邮件发送时间
             helper.setSentDate(new Date());
             //5.邮件发送
+            System.out.println("3.发送开始时间："+new Date());
             javaMailSender.send(message);
+            System.out.println("4.发送完成时间："+new Date());
         } catch (Exception e) {
             log.error("邮件发送失败", e);
             throw new BusinessException("邮件发送失败");
