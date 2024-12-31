@@ -3,6 +3,80 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="top.enderherman.netdisk.mapper.UserMapper">
 
+    <insert id="insert" parameterType="top.enderherman.netdisk.entity.pojo.User">
+        INSERT INTO user_info
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="bean.userId != null">
+                user_id,
+            </if>
+            <if test="bean.nickName != null">
+                nick_name,
+            </if>
+            <if test="bean.email != null">
+                email,
+            </if>
+            <if test="bean.qqOpenId != null">
+                qq_open_id,
+            </if>
+            <if test="bean.qqAvatar != null">
+                qq_avatar,
+            </if>
+            <if test="bean.password != null">
+                password,
+            </if>
+            <if test="bean.createTime != null">
+                create_time,
+            </if>
+            <if test="bean.lastLoginTime != null">
+                last_login_time,
+            </if>
+            <if test="bean.status != null">
+                status,
+            </if>
+            <if test="bean.useSpace != null">
+                use_space,
+            </if>
+            <if test="bean.totalSpace != null">
+                total_space,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="bean.userId!=null">
+                #{bean.userId},
+            </if>
+            <if test="bean.nickName!=null">
+                #{bean.nickName},
+            </if>
+            <if test="bean.email!=null">
+                #{bean.email},
+            </if>
+            <if test="bean.qqOpenId!=null">
+                #{bean.qqOpenId},
+            </if>
+            <if test="bean.qqAvatar!=null">
+                #{bean.qqAvatar},
+            </if>
+            <if test="bean.password!=null">
+                #{bean.password},
+            </if>
+            <if test="bean.createTime!=null">
+                #{bean.createTime},
+            </if>
+            <if test="bean.lastLoginTime!=null">
+                #{bean.lastLoginTime},
+            </if>
+            <if test="bean.status!=null">
+                #{bean.status},
+            </if>
+            <if test="bean.useSpace!=null">
+                #{bean.useSpace},
+            </if>
+            <if test="bean.totalSpace!=null">
+                #{bean.totalSpace},
+            </if>
+        </trim>
+    </insert>
+
     <!--实体映射-->
     <resultMap id="base_result_map" type="top.enderherman.netdisk.entity.pojo.User">
         <!--用户ID-->
@@ -36,16 +110,92 @@
 		 total_space
     </sql>
 
+
     <!--根据主键查找-->
     <select id="selectByEmail" resultMap="base_result_map">
         select
         <include refid="base_column_list"/>
         from user_info where email=#{email}
     </select>
+
+    <!--根据昵称查找-->
     <select id="selectByNickName" resultMap="base_result_map">
         select
         <include refid="base_column_list"/>
         from user_info where nick_name=#{nickName}
     </select>
+
+    <update id="updateByUserId" parameterType="top.enderherman.netdisk.entity.pojo.User">
+        update user_info
+        <set>
+            <if test="bean.email != null">
+                email = #{bean.email},
+            </if>
+            <if test="bean.nickName != null">
+                nick_name = #{bean.nickName},
+            </if>
+            <if test="bean.qqOpenId != null">
+                qq_open_id = #{bean.qqOpenId},
+            </if>
+            <if test="bean.qqAvatar != null">
+                qq_avatar = #{bean.qqAvatar},
+            </if>
+            <if test="bean.password != null">
+                password = #{bean.password},
+            </if>
+            <if test="bean.createTime != null">
+                create_time = #{bean.createTime},
+            </if>
+            <if test="bean.lastLoginTime != null">
+                last_login_time = #{bean.lastLoginTime},
+            </if>
+            <if test="bean.status != null">
+                status = #{bean.status},
+            </if>
+            <if test="bean.useSpace != null">
+                use_space = #{bean.useSpace},
+            </if>
+            <if test="bean.totalSpace != null">
+                total_space = #{bean.totalSpace}
+            </if>
+        </set>
+        where user_id=#{userId}
+    </update>
+    <update id="updateByEmail" parameterType="top.enderherman.netdisk.entity.pojo.User">
+        update user_info
+        <set>
+            <if test="bean.userId != null">
+                user_id = #{bean.userId},
+            </if>
+            <if test="bean.nickName != null">
+                nick_name = #{bean.nickName},
+            </if>
+            <if test="bean.qqOpenId != null">
+                qq_open_id = #{bean.qqOpenId},
+            </if>
+            <if test="bean.qqAvatar != null">
+                qq_avatar = #{bean.qqAvatar},
+            </if>
+            <if test="bean.password != null">
+                password = #{bean.password},
+            </if>
+            <if test="bean.createTime != null">
+                create_time = #{bean.createTime},
+            </if>
+            <if test="bean.lastLoginTime != null">
+                last_login_time = #{bean.lastLoginTime},
+            </if>
+            <if test="bean.status != null">
+                status = #{bean.status},
+            </if>
+            <if test="bean.useSpace != null">
+                use_space = #{bean.useSpace},
+            </if>
+            <if test="bean.totalSpace != null">
+                total_space = #{bean.totalSpace}
+            </if>
+        </set>
+        where email=#{email}
+    </update>
 
 </mapper>

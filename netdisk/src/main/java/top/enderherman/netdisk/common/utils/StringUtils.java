@@ -44,4 +44,14 @@ public class StringUtils {
     public static String encodingByMd5(String originString) {
         return isEmpty(originString) ? null : DigestUtils.md5Hex(originString);
     }
+
+    public static boolean verifyPath(String path) {
+        if (StringUtils.isEmpty(path)) {
+            return true;
+        }
+        if (path.contains("../") || path.contains("..\\")) {
+            return false;
+        }
+        return true;
+    }
 }

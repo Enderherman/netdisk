@@ -5,34 +5,28 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="6b0197f7-b41b-4bb5-bdae-6fdf354b132e" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/netdisk/src/main/java/top/enderherman/netdisk/annotation/GlobalInterceptor.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/netdisk/src/main/java/top/enderherman/netdisk/annotation/VerifyParam.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/netdisk/src/main/java/top/enderherman/netdisk/aspect/GlobalOperationAspect.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/netdisk/src/main/java/top/enderherman/netdisk/common/utils/VerifyUtils.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/netdisk/src/main/java/top/enderherman/netdisk/controller/GlobalExceptionHandlerController.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/netdisk/src/main/java/top/enderherman/netdisk/entity/dto/SessionWebUserDto.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/netdisk/src/main/java/top/enderherman/netdisk/entity/enums/UserStatusEnum.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/netdisk/src/main/java/top/enderherman/netdisk/entity/enums/VerifyRegexEnum.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/netdisk/src/main/java/top/enderherman/netdisk/entity/query/FileQuery.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/netdisk/src/main/java/top/enderherman/netdisk/mapper/FileMapper.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/netdisk/src/main/resources/top/enderherman/netdisk/mapper/FileMapper.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/netdisk/src/main/java/top/enderherman/netdisk/common/config/RedisConfig.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/netdisk/src/main/java/top/enderherman/netdisk/entity/dto/UserSpaceDto.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/netdisk/src/main/resources/application-dev.yml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/netdisk/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/netdisk/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/netdisk/src/main/java/top/enderherman/netdisk/aspect/GlobalOperationAspect.java" beforeDir="false" afterPath="$PROJECT_DIR$/netdisk/src/main/java/top/enderherman/netdisk/aspect/GlobalOperationAspect.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/netdisk/src/main/java/top/enderherman/netdisk/common/component/RedisComponent.java" beforeDir="false" afterPath="$PROJECT_DIR$/netdisk/src/main/java/top/enderherman/netdisk/common/component/RedisComponent.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/netdisk/src/main/java/top/enderherman/netdisk/common/config/EmailConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/netdisk/src/main/java/top/enderherman/netdisk/common/config/SystemConfig.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/netdisk/src/main/java/top/enderherman/netdisk/common/config/AppConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/netdisk/src/main/java/top/enderherman/netdisk/common/config/AppConfig.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/netdisk/src/main/java/top/enderherman/netdisk/common/config/SystemConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/netdisk/src/main/java/top/enderherman/netdisk/common/config/SystemConfig.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/netdisk/src/main/java/top/enderherman/netdisk/common/constants/Constants.java" beforeDir="false" afterPath="$PROJECT_DIR$/netdisk/src/main/java/top/enderherman/netdisk/common/constants/Constants.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/netdisk/src/main/java/top/enderherman/netdisk/common/utils/RedisUtils.java" beforeDir="false" afterPath="$PROJECT_DIR$/netdisk/src/main/java/top/enderherman/netdisk/common/utils/RedisUtils.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/netdisk/src/main/java/top/enderherman/netdisk/common/utils/StringUtils.java" beforeDir="false" afterPath="$PROJECT_DIR$/netdisk/src/main/java/top/enderherman/netdisk/common/utils/StringUtils.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/netdisk/src/main/java/top/enderherman/netdisk/controller/BaseController.java" beforeDir="false" afterPath="$PROJECT_DIR$/netdisk/src/main/java/top/enderherman/netdisk/controller/BaseController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/netdisk/src/main/java/top/enderherman/netdisk/controller/UserController.java" beforeDir="false" afterPath="$PROJECT_DIR$/netdisk/src/main/java/top/enderherman/netdisk/controller/UserController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/netdisk/src/main/java/top/enderherman/netdisk/entity/query/BaseParam.java" beforeDir="false" afterPath="$PROJECT_DIR$/netdisk/src/main/java/top/enderherman/netdisk/entity/query/BaseParam.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/netdisk/src/main/java/top/enderherman/netdisk/entity/query/EmailCodeQuery.java" beforeDir="false" afterPath="$PROJECT_DIR$/netdisk/src/main/java/top/enderherman/netdisk/entity/query/EmailCodeQuery.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/netdisk/src/main/java/top/enderherman/netdisk/entity/query/UserQuery.java" beforeDir="false" afterPath="$PROJECT_DIR$/netdisk/src/main/java/top/enderherman/netdisk/entity/query/UserQuery.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/netdisk/src/main/java/top/enderherman/netdisk/entity/enums/ResponseCodeEnum.java" beforeDir="false" afterPath="$PROJECT_DIR$/netdisk/src/main/java/top/enderherman/netdisk/entity/enums/ResponseCodeEnum.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/netdisk/src/main/java/top/enderherman/netdisk/entity/pojo/File.java" beforeDir="false" afterPath="$PROJECT_DIR$/netdisk/src/main/java/top/enderherman/netdisk/entity/pojo/FileInfo.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/netdisk/src/main/java/top/enderherman/netdisk/mapper/FileMapper.java" beforeDir="false" afterPath="$PROJECT_DIR$/netdisk/src/main/java/top/enderherman/netdisk/mapper/FileMapper.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/netdisk/src/main/java/top/enderherman/netdisk/mapper/UserMapper.java" beforeDir="false" afterPath="$PROJECT_DIR$/netdisk/src/main/java/top/enderherman/netdisk/mapper/UserMapper.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/netdisk/src/main/java/top/enderherman/netdisk/service/UserService.java" beforeDir="false" afterPath="$PROJECT_DIR$/netdisk/src/main/java/top/enderherman/netdisk/service/UserService.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/netdisk/src/main/java/top/enderherman/netdisk/service/impl/EmailCodeServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/netdisk/src/main/java/top/enderherman/netdisk/service/impl/EmailCodeServiceImpl.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/netdisk/src/main/java/top/enderherman/netdisk/service/impl/UserServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/netdisk/src/main/java/top/enderherman/netdisk/service/impl/UserServiceImpl.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/netdisk/src/main/resources/application.yml" beforeDir="false" afterPath="$PROJECT_DIR$/netdisk/src/main/resources/application.yml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/netdisk/src/main/resources/top/enderherman/netdisk/mapper/EmailCodeMapper.xml" beforeDir="false" afterPath="$PROJECT_DIR$/netdisk/src/main/resources/top/enderherman/netdisk/mapper/EmailCodeMapper.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/netdisk/src/main/resources/top/enderherman/netdisk/mapper/FileMapper.xml" beforeDir="false" afterPath="$PROJECT_DIR$/netdisk/src/main/resources/top/enderherman/netdisk/mapper/FileMapper.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/netdisk/src/main/resources/top/enderherman/netdisk/mapper/UserMapper.xml" beforeDir="false" afterPath="$PROJECT_DIR$/netdisk/src/main/resources/top/enderherman/netdisk/mapper/UserMapper.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -102,7 +96,20 @@
       <recent name="C:\Users\Administrator\Desktop\java\netdisk\netdisk\src\main\resources\top\enderherman\netdisk\mapper" />
     </key>
   </component>
-  <component name="RunManager">
+  <component name="RunManager" selected="Spring Boot.NetdiskApplication">
+    <configuration name="main" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="top.enderherman.netdisk.annotation.main" />
+      <module name="netdisk" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="top.enderherman.netdisk.annotation.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <configuration default="true" type="ArquillianTestNG" factoryName="" nameIsGenerated="true">
       <option name="arquillianRunConfiguration">
         <value>
@@ -132,6 +139,7 @@
     <recent_temporary>
       <list>
         <item itemvalue="Spring Boot.NetdiskApplication" />
+        <item itemvalue="Application.main" />
       </list>
     </recent_temporary>
   </component>
@@ -161,7 +169,10 @@
       <workItem from="1735450298007" duration="1628000" />
       <workItem from="1735451944069" duration="1784000" />
       <workItem from="1735457217349" duration="13791000" />
-      <workItem from="1735522053501" duration="23539000" />
+      <workItem from="1735522053501" duration="24259000" />
+      <workItem from="1735578294674" duration="27000" />
+      <workItem from="1735606055632" duration="26718000" />
+      <workItem from="1735652344984" duration="7608000" />
     </task>
     <task id="LOCAL-00001" summary="图片验证码功能完善">
       <created>1734975209542</created>
@@ -184,7 +195,14 @@
       <option name="project" value="LOCAL" />
       <updated>1735487340563</updated>
     </task>
-    <option name="localTasksCounter" value="4" />
+    <task id="LOCAL-00004" summary="AOP完成(参数校验与登录校验完成),注册逻辑完成。">
+      <created>1735577660302</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1735577660302</updated>
+    </task>
+    <option name="localTasksCounter" value="5" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -194,6 +212,18 @@
     <MESSAGE value="图片验证码功能完善" />
     <MESSAGE value="邮件验证码基础实现" />
     <MESSAGE value="邮件验证码完成" />
-    <option name="LAST_COMMIT_MESSAGE" value="邮件验证码完成" />
+    <MESSAGE value="AOP完成(参数校验与登录校验完成),注册逻辑完成。" />
+    <option name="LAST_COMMIT_MESSAGE" value="AOP完成(参数校验与登录校验完成),注册逻辑完成。" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/netdisk/src/main/java/top/enderherman/netdisk/common/component/RedisComponent.java</url>
+          <line>52</line>
+          <option name="timeStamp" value="15" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
   </component>
 </project>

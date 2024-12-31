@@ -8,7 +8,7 @@ import java.io.Serializable;
 import java.util.Date;
 
 @Data
-public class File implements Serializable {
+public class FileInfo implements Serializable {
 
     /**
      * 文件ID

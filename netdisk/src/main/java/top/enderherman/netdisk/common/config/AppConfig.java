@@ -13,4 +13,7 @@ public class AppConfig {
 
     @Value("${admin.email:}")
     private String adminEmails;
+
+    @Value("${project.folder:}")
+    private String projectFolder;
 }

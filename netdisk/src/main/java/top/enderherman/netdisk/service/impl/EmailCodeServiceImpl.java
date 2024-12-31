@@ -85,18 +85,18 @@ public class EmailCodeServiceImpl implements EmailCodeService {
             helper.setFrom(appConfig.getSendUserName());
             helper.setTo(toEmail);
             //2.设置发送主题
-            System.out.println("1.开始时间："+new Date());
+            System.out.println("1.开始时间：" + new Date());
             SystemConfig systemConfig = redisComponent.getSystemConfig();
-            System.out.println("2.redis操作完成时间："+new Date());
+            System.out.println("2.redis操作完成时间：" + new Date());
             helper.setSubject(systemConfig.getRegisterEmailTitle());
             //3.设置发送内容
             helper.setText(String.format(systemConfig.getRegisterEmailContent(), code));
             //4.邮件发送时间
             helper.setSentDate(new Date());
             //5.邮件发送
-            System.out.println("3.发送开始时间："+new Date());
+            System.out.println("3.发送开始时间：" + new Date());
             javaMailSender.send(message);
-            System.out.println("4.发送完成时间："+new Date());
+            System.out.println("4.发送完成时间：" + new Date());
         } catch (Exception e) {
             log.error("邮件发送失败", e);
             throw new BusinessException("邮件发送失败");

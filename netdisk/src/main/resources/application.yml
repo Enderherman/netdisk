@@ -5,6 +5,8 @@ server:
     session:
       timeout: PT60M
 spring:
+  profiles:
+    active: dev
   servlet:
     multipart:
       max-file-size: 100MB
@@ -34,14 +36,20 @@ spring:
     protocol: smtps
   data:
     redis:
+      database: 0
       host: 127.0.0.1
       port: 6379
-      jedis:
+      timeout: 2000ms
+      lettuce:
         pool:
           max-active: 20
-          max-wait: -1
+          max-wait: -1ms
           max-idle: 10
           min-idle: 0
-      timeout: 2000
+#查询生成的SQL语句
+#mybatis:
+#  configuration:
+#    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+
 admin:
   email: 1261408331@qq.com

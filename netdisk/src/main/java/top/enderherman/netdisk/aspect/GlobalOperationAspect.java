@@ -39,13 +39,13 @@ public class GlobalOperationAspect {
     }
 
     @Before("requestInterceptor()")
-    public void interceptor(JoinPoint joinPoint) throws BusinessException {
+    public void interceptor(JoinPoint point) throws BusinessException {
         try {
             //1.获取方法相关信息
-            Object target = joinPoint.getTarget();
-            Object[] args = joinPoint.getArgs();
-            String methodName = joinPoint.getSignature().getName();
-            Class<?>[] parameterTypes = ((MethodSignature) joinPoint.getSignature()).getParameterTypes();
+            Object target = point.getTarget();
+            Object[] args = point.getArgs();
+            String methodName = point.getSignature().getName();
+            Class<?>[] parameterTypes = ((MethodSignature) point.getSignature()).getParameterTypes();
             Method method = target.getClass().getMethod(methodName, parameterTypes);
             GlobalInterceptor interceptor = method.getAnnotation(GlobalInterceptor.class);
             if (interceptor == null) {
@@ -53,7 +53,7 @@ public class GlobalOperationAspect {
             }
             //2.校验登录
             if (interceptor.checkLogin() || interceptor.checkAdmin()) {
-                validateLogin(interceptor.checkLogin());
+                validateLogin(interceptor.checkAdmin());
             }
 
             //3.校验参数
@@ -71,14 +71,13 @@ public class GlobalOperationAspect {
     }
 
 
-    private void validateLogin(Boolean checkLogin) {
+    private void validateLogin(Boolean checkAdmin) {
         HttpServletRequest request = ((ServletRequestAttributes) RequestContextHolder.currentRequestAttributes()).getRequest();
         HttpSession session = request.getSession();
-        SessionWebUserDto sessionWebUserDto = (SessionWebUserDto) session.getAttribute(Constants.SESSION_KEY);
-        if (sessionWebUserDto == null) {
+        SessionWebUserDto sessionWebUserDto = (SessionWebUserDto) session.getAttribute(Constants.SESSION_KEY);       if (sessionWebUserDto == null) {
             throw new BusinessException(ResponseCodeEnum.CODE_901);
         }
-        if (checkLogin && !sessionWebUserDto.getIsAdmin()) {
+        if (checkAdmin && !sessionWebUserDto.getIsAdmin()) {
             throw new BusinessException(ResponseCodeEnum.CODE_404);
         }
     }
@@ -146,7 +145,7 @@ public class GlobalOperationAspect {
         }
 
         //3.校验正则 首先需要校验正则 再看符不符合正则
-        if (!isEmpty && !StringUtils.isEmpty(verifyParam.regex().getRegex()) && VerifyUtils.verify(verifyParam.regex(), String.valueOf(value))) {
+        if (!isEmpty && !StringUtils.isEmpty(verifyParam.regex().getRegex()) && !VerifyUtils.verify(verifyParam.regex(), String.valueOf(value))) {
             throw new BusinessException(ResponseCodeEnum.CODE_600);
         }
 
