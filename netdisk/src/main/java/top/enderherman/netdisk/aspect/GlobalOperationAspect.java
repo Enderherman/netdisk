@@ -74,7 +74,8 @@ public class GlobalOperationAspect {
     private void validateLogin(Boolean checkAdmin) {
         HttpServletRequest request = ((ServletRequestAttributes) RequestContextHolder.currentRequestAttributes()).getRequest();
         HttpSession session = request.getSession();
-        SessionWebUserDto sessionWebUserDto = (SessionWebUserDto) session.getAttribute(Constants.SESSION_KEY);       if (sessionWebUserDto == null) {
+        SessionWebUserDto sessionWebUserDto = (SessionWebUserDto) session.getAttribute(Constants.SESSION_KEY);
+        if (sessionWebUserDto == null) {
             throw new BusinessException(ResponseCodeEnum.CODE_901);
         }
         if (checkAdmin && !sessionWebUserDto.getIsAdmin()) {
@@ -116,7 +117,7 @@ public class GlobalOperationAspect {
                     continue;
                 field.setAccessible(true);
                 Object fieldValue = field.get(value);
-                checkValue(fieldValue,fieldVerifyParam);
+                checkValue(fieldValue, fieldVerifyParam);
             }
 
 

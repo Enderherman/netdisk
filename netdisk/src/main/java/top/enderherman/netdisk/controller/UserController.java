@@ -27,7 +27,10 @@ import top.enderherman.netdisk.service.UserService;
 import java.io.File;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.lang.reflect.Field;
+import java.io.UnsupportedEncodingException;
+import java.net.URLEncoder;
+import java.nio.charset.StandardCharsets;
+import java.util.HashMap;
 
 /**
  * 用户信息Controller
@@ -35,7 +38,7 @@ import java.lang.reflect.Field;
 @Slf4j
 @RestController("accountController")
 @RequestMapping()
-public class UserController extends BaseController {
+public class UserController extends ABaseController {
 
     @Resource
     private EmailCodeService emailCodeService;
@@ -209,7 +212,6 @@ public class UserController extends BaseController {
     }
 
 
-
     @RequestMapping("/updatePassword")
     @GlobalInterceptor(checkParams = true)
     public BaseResponse<?> updatePassword(HttpSession session,
@@ -253,5 +255,28 @@ public class UserController extends BaseController {
         webUserDto.setAvatar(null);
         session.setAttribute(Constants.SESSION_KEY, webUserDto);
         return getSuccessResponse(null);
+    }
+
+    @RequestMapping("/qqlogin")
+    @GlobalInterceptor(checkParams = true, checkLogin = false)
+    public BaseResponse<?> qqLogin(HttpSession session, String callBackUrl) {
+        String state = StringUtils.getRandomString(Constants.LENGTH_30);
+        if (!StringUtils.isEmpty(state)) {
+            session.setAttribute(state, callBackUrl);
+        }
+        String url = String.format(appConfig.getQqUrlAuthorization(), appConfig.getQqAppId(), URLEncoder.encode(appConfig.getQqUrlRedirect(), StandardCharsets.UTF_8), state);
+        return getSuccessResponse(url);
+    }
+
+    @RequestMapping("/qqlogin/callback")
+    @GlobalInterceptor(checkParams = true, checkLogin = false)
+    public BaseResponse<?> qqLoginCallback(HttpSession session,
+                                           @VerifyParam(required = true) String code,
+                                           @VerifyParam(required = true) String state) {
+        SessionWebUserDto sessionWebUserDto = userService.qqLogin(code);
+        HashMap<String, Object> result = new HashMap<>();
+        result.put("callbackUrl", session.getAttribute(state));
+        result.put("userInfo", sessionWebUserDto);
+        return getSuccessResponse(result);
     }
 }

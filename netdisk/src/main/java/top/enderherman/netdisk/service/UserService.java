@@ -14,4 +14,6 @@ public interface UserService {
     void resetPwd(String email, String password, String emailCode);
 
     void updateUserByUserId(User user, String userId);
+
+    SessionWebUserDto qqLogin(String code);
 }

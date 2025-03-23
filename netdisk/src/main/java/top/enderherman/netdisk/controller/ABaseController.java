@@ -1,15 +1,16 @@
 package top.enderherman.netdisk.controller;
 
-import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 import lombok.extern.slf4j.Slf4j;
 import top.enderherman.netdisk.common.BaseResponse;
 import top.enderherman.netdisk.common.constants.Constants;
+import top.enderherman.netdisk.common.utils.CopyUtils;
 import top.enderherman.netdisk.common.utils.StringUtils;
 import top.enderherman.netdisk.entity.dto.SessionWebUserDto;
 import top.enderherman.netdisk.entity.enums.ResponseCodeEnum;
 import top.enderherman.netdisk.common.exceptions.BusinessException;
+import top.enderherman.netdisk.entity.vo.PaginationResultVO;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -22,7 +23,7 @@ import java.io.OutputStream;
  * 控制器基类
  */
 @Slf4j
-public class BaseController {
+public class ABaseController {
 
     protected static final String STATUS_SUCCESS = "success";
 
@@ -61,6 +62,7 @@ public class BaseController {
             response.setCode(e.getCode());
         }
         response.setMessage(e.getMessage());
+        response.setData(t);
         return response;
     }
 
@@ -75,7 +77,26 @@ public class BaseController {
         response.setStatus(STATUS_ERROR);
         response.setCode(ResponseCodeEnum.CODE_500.getCode());
         response.setMessage(ResponseCodeEnum.CODE_500.getMsg());
+        response.setData(t);
         return response;
+    }
+
+    /**
+     * pojoList -> voList
+     * @param sourceVO pojoList
+     * @param tClass vo类
+     * @param <S> pojoList
+     * @param <T> voList
+     * @return voList
+     */
+    protected <S, T> PaginationResultVO<T> convert2PaginationVO(PaginationResultVO<S> sourceVO, Class<T> tClass) {
+        PaginationResultVO<T> resultVO = new PaginationResultVO<>();
+        resultVO.setList(CopyUtils.copyList(sourceVO.getList(), tClass));
+        resultVO.setPageNo(sourceVO.getPageNo());
+        resultVO.setPageSize(sourceVO.getPageSize());
+        resultVO.setPageTotal(sourceVO.getPageTotal());
+        resultVO.setTotalCount(sourceVO.getTotalCount());
+        return resultVO;
     }
 
     /**
@@ -135,8 +156,6 @@ public class BaseController {
     }
 
 
-
-
     /**
      * 从session里获取用户信息
      *
@@ -144,8 +163,7 @@ public class BaseController {
      * @return 登录信息
      */
     protected SessionWebUserDto getUserInfoFromSession(HttpSession session) {
-        SessionWebUserDto sessionWebUserDto = (SessionWebUserDto) session.getAttribute(Constants.SESSION_KEY);
-        return sessionWebUserDto;
+        return (SessionWebUserDto) session.getAttribute(Constants.SESSION_KEY);
     }
 
 //    protected SessionShareDto getSessionShareFromSession(HttpSession session, String shareId) {

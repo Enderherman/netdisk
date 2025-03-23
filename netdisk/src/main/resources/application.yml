@@ -53,3 +53,16 @@ spring:
 
 admin:
   email: 1261408331@qq.com
+# qq登陆相关
+qq:
+  app:
+    id: 12333
+    key: 2222222
+  url:
+    authorization: https://graph.qq.com/oauth2.0/authorize?response_type=code&client_id=%s&redirect_uri=%s&state=%s
+    access:
+      token: https://graph.qq.com/oauth2.0/token?grant_type=authorization_code&client_id=%s&client_secret=%s&code=%s&redirect_uri=%s
+    openid: https://graph.qq.com/oauth2.0/me?access_token=%S
+    user:
+      info: https://graph.qq.com/user/get_user_info?access_token=%s&oauth_consumer_key=%s&openid=%s
+    redirect: http://easypan.wuhancoder.com/qqlogincalback

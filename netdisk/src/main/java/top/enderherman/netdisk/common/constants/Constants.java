@@ -43,11 +43,19 @@ public class Constants {
 
     public static final String AVATAR_DEFAULT = "default_avatar.jpg";
 
+    public static final String IMAGE_PNG_SUFFIX = ".png";
+
+    public static final String TS_NAME = "index.ts";
+
+    public static final String M3U8_NAME = "index.m3u8";
+
 
     //redis中 系统设置
     public static final String REDIS_KEY_SYS_SETTING = "netdisk:syssetting:";
 
     public static final String REDIS_KEY_USER_SPACE_USE = "netdisk:user:spaceUse:";
+
+    public static final Object REDIS_KEY_USER_FILE_TEMP_SIZE = "netdisk:user:file:temp";
 
     public static final Integer REDIS_KEY_EXPIRES_ONE_MIN = 60;
 
@@ -56,4 +64,6 @@ public class Constants {
     public static final Integer REDIS_KEY_EXPIRES_ONE_HOUR = REDIS_KEY_EXPIRES_ONE_MIN * 60;
 
     public static final Integer REDIS_KEY_EXPIRES_DAY = REDIS_KEY_EXPIRES_ONE_MIN * 60 * 24;
+
+
 }

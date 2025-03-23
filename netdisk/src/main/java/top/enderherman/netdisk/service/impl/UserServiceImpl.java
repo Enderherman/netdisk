@@ -123,4 +123,10 @@ public class UserServiceImpl implements UserService {
     public void updateUserByUserId(User bean, String userId) {
         userMapper.updateByUserId(bean, userId);
     }
+
+    @Override
+    public SessionWebUserDto qqLogin(String code) {
+        //TODO QQLogin
+        return null;
+    }
 }
