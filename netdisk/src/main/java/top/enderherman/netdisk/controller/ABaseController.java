@@ -101,7 +101,6 @@ public class ABaseController {
 
     /**
      * 将指定路径的文件写入到 HttpServletResponse 输出流中，以实现文件下载或展示功能。
-     *
      * @param response HttpServletResponse，用于向客户端写出文件内容。
      * @param filePath 文件的完整路径，用于定位需要输出的文件。
      */
@@ -110,28 +109,23 @@ public class ABaseController {
         if (!StringUtils.verifyPath(filePath)) {
             return;
         }
-
         OutputStream out = null; // 定义输出流，用于将文件数据写入响应。
         FileInputStream in = null; // 定义输入流，用于读取文件内容。
-
         try {
             // 2. 检查文件是否存在
             File file = new File(filePath);
             if (!file.exists()) {
                 return;
             }
-
             // 3. 打开文件输入流，准备读取文件内容
             in = new FileInputStream(file);
             byte[] data = new byte[1024]; // 定义缓冲区，用于读取文件内容
             out = response.getOutputStream(); // 获取响应的输出流，用于写入文件内容到客户端。
-
             int length;
             // 4. 循环读取文件内容，并将数据写入输出流
             while ((length = in.read(data)) != -1) {
                 out.write(data, 0, length); // 将读取的内容写入到响应输出流
             }
-
             out.flush(); // 输出流中数据全部写入客户端
         } catch (Exception e) {
             // 5. 捕获异常，记录错误日志

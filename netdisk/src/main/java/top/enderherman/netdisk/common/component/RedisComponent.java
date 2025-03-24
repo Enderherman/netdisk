@@ -6,6 +6,7 @@ import org.springframework.stereotype.Component;
 import top.enderherman.netdisk.common.config.SystemConfig;
 import top.enderherman.netdisk.common.constants.Constants;
 import top.enderherman.netdisk.common.utils.RedisUtils;
+import top.enderherman.netdisk.entity.dto.DownloadFileDto;
 import top.enderherman.netdisk.entity.dto.UserSpaceDto;
 import top.enderherman.netdisk.entity.pojo.FileInfo;
 import top.enderherman.netdisk.entity.query.FileQuery;
@@ -36,6 +37,9 @@ public class RedisComponent {
         return systemConfig;
     }
 
+    /**
+     * 存储用户已使用空间
+     */
     public void saveUserSpaceDto(String userId, UserSpaceDto userSpaceDto) {
         redisUtils.setEx(Constants.REDIS_KEY_USER_SPACE_USE + userId, userSpaceDto, Constants.REDIS_KEY_EXPIRES_DAY);
     }
@@ -70,7 +74,7 @@ public class RedisComponent {
         return getFileSizeFromRedis(Constants.REDIS_KEY_USER_FILE_TEMP_SIZE + userId + fileId);
     }
 
-    public Long getFileSizeFromRedis(String key) {
+    private Long getFileSizeFromRedis(String key) {
         Object sizeObj = redisUtils.get(key);
         if (sizeObj == null) {
             return 0L;
@@ -83,11 +87,27 @@ public class RedisComponent {
         return 0L;
     }
 
-    //保存临时文件大小
+    /**
+     * 保存临时文件大小
+     */
     public void saveFileTempSize(String userId, String fileId, Long fileSize) {
         Long currentSize = getFileTemplateSize(userId, fileId);
         redisUtils.setEx(Constants.REDIS_KEY_USER_FILE_TEMP_SIZE + userId + fileId, currentSize + fileSize,
                 Constants.REDIS_KEY_EXPIRES_ONE_HOUR);
     }
 
+    /**
+     * 存储下载时的code
+     * @param code 50位code
+     */
+    public void saveDownloadCode(String code, DownloadFileDto fileDto) {
+        redisUtils.setEx(Constants.REDIS_KEY_DOWNLOAD + code, fileDto, Constants.REDIS_KEY_EXPIRES_FIVE_MIN);
+    }
+
+    /**
+     * 获取对应文件的code
+     */
+    public DownloadFileDto getDownloadCode(String code) {
+        return (DownloadFileDto) redisUtils.get(Constants.REDIS_KEY_DOWNLOAD + code);
+    }
 }

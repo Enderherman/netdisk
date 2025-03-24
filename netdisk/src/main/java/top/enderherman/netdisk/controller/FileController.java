@@ -2,6 +2,7 @@ package top.enderherman.netdisk.controller;
 
 
 import jakarta.annotation.Resource;
+import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 import lombok.extern.slf4j.Slf4j;
@@ -197,10 +198,9 @@ public class FileController extends ACommonFileController {
             String[] split = currentFileIds.split(",");
             if (split.length >= 1) {
                 String[] finalStr = new String[split.length - 1];
-                System.arraycopy(split,1,finalStr,0,finalStr.length);
+                System.arraycopy(split, 1, finalStr, 0, finalStr.length);
                 fileQuery.setExcludeFileIdArray(finalStr);
             }
-
         }
         fileQuery.setDelFlag(FileDeleteFlagEnum.USING.getFlag());
         fileQuery.setOrderBy("create_time desc");
@@ -221,5 +221,39 @@ public class FileController extends ACommonFileController {
         fileService.changeFileFolder(fileIds, filePid, sessionWebUserDto.getUserId());
         return getSuccessResponse(null);
     }
+
+    /**
+     * 创建下载链接 短时时间串
+     */
+    @RequestMapping("/createDownloadUrl/{fileId}")
+    @GlobalInterceptor(checkParams = true)
+    public BaseResponse<?> getDownloadUrl(HttpSession session,
+                                          @VerifyParam(required = true) @PathVariable("fileId") String fileId
+    ) {
+        SessionWebUserDto userDto = getUserInfoFromSession(session);
+        return super.createDownloadUrl(fileId, userDto.getUserId());
+    }
+
+    /**
+     * 使用code进行下载
+     */
+    @RequestMapping("/download/{code}")
+    @GlobalInterceptor(checkParams = true, checkLogin = false)
+    public void download(HttpServletRequest request,
+                         HttpServletResponse response,
+                         @VerifyParam(required = true) @PathVariable("code") String code
+    ) throws Exception {
+        super.download(request,response, code);
+    }
+
+    @RequestMapping("/delFile")
+    @GlobalInterceptor(checkParams = true)
+    public BaseResponse<?> delFile(HttpSession session,
+                                   @VerifyParam(required = true) String fileIds){
+        SessionWebUserDto webUserDto = getUserInfoFromSession(session);
+        fileService.removeFile2RecycleBatch(webUserDto.getUserId(), fileIds);
+        return getSuccessResponse(null);
+    }
+
 
 }

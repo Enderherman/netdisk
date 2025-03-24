@@ -55,7 +55,9 @@ public class Constants {
 
     public static final String REDIS_KEY_USER_SPACE_USE = "netdisk:user:spaceUse:";
 
-    public static final Object REDIS_KEY_USER_FILE_TEMP_SIZE = "netdisk:user:file:temp";
+    public static final String REDIS_KEY_USER_FILE_TEMP_SIZE = "netdisk:user:file:temp";
+
+    public static final String REDIS_KEY_DOWNLOAD = "netdisk:download:";
 
     public static final Integer REDIS_KEY_EXPIRES_ONE_MIN = 60;
 
@@ -64,6 +66,7 @@ public class Constants {
     public static final Integer REDIS_KEY_EXPIRES_ONE_HOUR = REDIS_KEY_EXPIRES_ONE_MIN * 60;
 
     public static final Integer REDIS_KEY_EXPIRES_DAY = REDIS_KEY_EXPIRES_ONE_MIN * 60 * 24;
+
 
 
 }

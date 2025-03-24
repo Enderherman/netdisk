@@ -85,4 +85,16 @@ public interface FileService {
      * 文件移动到指定文件夹
      */
     void changeFileFolder(String fileIds, String filePid, String userId);
+
+    /**
+     * 文件删除到回收站
+     */
+    void removeFile2RecycleBatch(String userId, String fileIds);
+
+    /**
+     * 从回收站恢复
+     */
+    void recoverFile(String userId, String fileIds);
+
+    void deleteFile(String userId, String fileIds, boolean adminOp);
 }

@@ -2,6 +2,7 @@ package top.enderherman.netdisk.mapper;
 
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
+import top.enderherman.netdisk.entity.pojo.FileInfo;
 
 import java.util.List;
 
@@ -29,4 +30,11 @@ public interface FileMapper<T,P> extends BaseMapper<T,P>{
 
     void updateFileStatusWithOldStatus(@Param("fileId") String fileId, @Param("userId") String userId,
                                        @Param("bean") T t, @Param("oldStatus") Integer oldStatus);
+
+    void updateFileDelFlagBatch(@Param("bean") FileInfo fileInfo, @Param("userId") String userId,
+                                @Param("filePidList")List<String> filePidList,
+                                @Param("fileIdList") List<String> fileIdList,
+                                @Param("oldDelFlag") Integer oldDelFlag);
+
+
 }

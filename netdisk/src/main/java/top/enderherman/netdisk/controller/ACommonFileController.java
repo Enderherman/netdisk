@@ -10,6 +10,7 @@ import top.enderherman.netdisk.common.config.AppConfig;
 import top.enderherman.netdisk.common.constants.Constants;
 import top.enderherman.netdisk.common.exceptions.BusinessException;
 import top.enderherman.netdisk.common.utils.CopyUtils;
+import top.enderherman.netdisk.entity.dto.DownloadFileDto;
 import top.enderherman.netdisk.entity.enums.FileCategoryEnum;
 import top.enderherman.netdisk.entity.enums.FileFolderTypeEnum;
 import top.enderherman.netdisk.entity.enums.ResponseCodeEnum;
@@ -22,6 +23,7 @@ import top.enderherman.netdisk.common.utils.StringUtils;
 
 import java.io.File;
 import java.net.URLEncoder;
+import java.nio.charset.StandardCharsets;
 import java.util.List;
 
 public class ACommonFileController extends ABaseController {
@@ -133,42 +135,44 @@ public class ACommonFileController extends ABaseController {
         return getSuccessResponse(CopyUtils.copyList(fileInfoList, FileInfoVO.class));
     }
 
-    //下载链接
-//    protected BaseResponse<?> createDownloadUrl(String fileId, String userId){
-//        FileInfo fileInfo = fileInfoService.getFileInfoByFileIdAndUserId(fileId, userId);
-//        if (fileInfo == null){
-//            throw new BusinessException(ResponseCodeEnum.CODE_600);
-//        }
-//        if (FileFolderTypeEnum.FOLDER.getType().equals(fileInfo.getFolderType())){
-//            throw new BusinessException(ResponseCodeEnum.CODE_600);
-//        }
-//        String code = StringUtils.getRandomString(Constants.LENGTH_50);
-//
-//        DownloadFileDto fileDto = new DownloadFileDto();
-//        fileDto.setDownloadCode(code);
-//        fileDto.setFileName(fileInfo.getFileName());
-//        fileDto.setFilePath(fileInfo.getFilePath());
-//        redisComponent.saveDownloadCode(code, fileDto);
-//
-//        return getSuccessResponseVO(code);
-//    }
-//
-//    protected void download(HttpServletRequest request, HttpServletResponse response, String code)throws Exception{
-//        DownloadFileDto downloadFileDto = redisComponent.getDownloadCode(code);
-//        if (downloadFileDto == null){
-//            return;
-//        }
-//        String filePath = appConfig.getProjectFolder() + Constants.FILE_FOLDER_FILE + downloadFileDto.getFilePath();
-//        String fileName = downloadFileDto.getFileName();
-//        response.setContentType("application/x-msdownload; charset=UTF-8");
-//        if (request.getHeader("User-Agent").toLowerCase().indexOf("msie") > 0){
-//            //IE浏览器
-//            fileName = URLEncoder.encode(fileName, "UTF-8");
-//        }else {
-//            fileName = new String(fileName.getBytes("UTF-8"),"ISO8859-1");
-//        }
-//        response.setHeader("Content-Disposition","attachment;filename=\"" + fileName + "\"");
-//        writeFile(response,filePath);
-//    }
+    /**
+     * 有时效性的获取下载链接
+     */
+    protected BaseResponse<?> createDownloadUrl(String fileId, String userId) {
+        FileInfo fileInfo = fileInfoService.getFileInfoByFileIdAndUserId(fileId, userId);
+        if (fileInfo == null) {
+            throw new BusinessException(ResponseCodeEnum.CODE_600);
+        }
+        if (FileFolderTypeEnum.FOLDER.getType().equals(fileInfo.getFolderType())) {
+            throw new BusinessException(ResponseCodeEnum.CODE_600);
+        }
+
+        //token
+        String code = StringUtils.getRandomString(Constants.LENGTH_50);
+        DownloadFileDto fileDto = new DownloadFileDto();
+        fileDto.setDownloadCode(code);
+        fileDto.setFileName(fileInfo.getFileName());
+        fileDto.setFilePath(fileInfo.getFilePath());
+        redisComponent.saveDownloadCode(code, fileDto);
+        return getSuccessResponse(code);
+    }
+
+    protected void download(HttpServletRequest request, HttpServletResponse response, String code) throws Exception {
+        DownloadFileDto downloadFileDto = redisComponent.getDownloadCode(code);
+        if (downloadFileDto == null){
+            return;
+        }
+        String filePath = appConfig.getProjectFolder() + Constants.FILE_FOLDER_FILE + downloadFileDto.getFilePath();
+        String fileName = downloadFileDto.getFileName();
+        response.setContentType("application/x-msdownload; charset=UTF-8");
+        if (request.getHeader("User-Agent").toLowerCase().indexOf("msie") > 0){
+            //IE浏览器
+            fileName = URLEncoder.encode(fileName, StandardCharsets.UTF_8);
+        }else {
+            fileName = new String(fileName.getBytes(StandardCharsets.UTF_8),"ISO8859-1");
+        }
+        response.setHeader("Content-Disposition","attachment;filename=\"" + fileName + "\"");
+        writeFile(response,filePath);
+    }
 
 }
