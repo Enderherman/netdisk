@@ -1,9 +1,15 @@
-#项目目录
-project:
-  folder: C:/Users/Administrator/Desktop/java/netdisk
 spring:
+  #数据库配置
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
     username: root
-    password: 1234
+    password: 942698358zxl
     url: jdbc:mysql://localhost:3306/netdisk?useUnicode=true&characterEncoding=utf-8&allowMultiQueries=true&useSSL=false&serverTimezone=GMT%2b8&allowPublicKeyRetrieval=true
+#项目目录
+project:
+  folder: /home/netdisk
+
+#日志级别配置
+log:
+  root:
+    level: info

@@ -4,31 +4,13 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="6b0197f7-b41b-4bb5-bdae-6fdf354b132e" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/netdisk/src/main/java/top/enderherman/netdisk/controller/ManageController.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/netdisk/src/main/java/top/enderherman/netdisk/controller/WebShareController.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/netdisk/src/main/java/top/enderherman/netdisk/entity/dto/SessionShareDto.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/netdisk/src/main/java/top/enderherman/netdisk/entity/enums/PageSize.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/netdisk/src/main/java/top/enderherman/netdisk/entity/enums/ShareValidTypeEnum.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/netdisk/src/main/java/top/enderherman/netdisk/entity/vo/ShareInfoVO.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/netdisk/src/main/java/top/enderherman/netdisk/entity/vo/UserInfoVO.java" afterDir="false" />
+    <list default="true" id="6b0197f7-b41b-4bb5-bdae-6fdf354b132e" name="Default Changelist" comment="1.外部分享, 管理员端功能完成">
+      <change afterPath="$PROJECT_DIR$/netdisk/src/main/resources/application-cloud.yml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/netdisk/src/main/java/top/enderherman/netdisk/common/component/RedisComponent.java" beforeDir="false" afterPath="$PROJECT_DIR$/netdisk/src/main/java/top/enderherman/netdisk/common/component/RedisComponent.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/netdisk/src/main/java/top/enderherman/netdisk/common/constants/Constants.java" beforeDir="false" afterPath="$PROJECT_DIR$/netdisk/src/main/java/top/enderherman/netdisk/common/constants/Constants.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/netdisk/src/main/java/top/enderherman/netdisk/controller/ABaseController.java" beforeDir="false" afterPath="$PROJECT_DIR$/netdisk/src/main/java/top/enderherman/netdisk/controller/ABaseController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/netdisk/src/main/java/top/enderherman/netdisk/controller/FileController.java" beforeDir="false" afterPath="$PROJECT_DIR$/netdisk/src/main/java/top/enderherman/netdisk/controller/FileController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/netdisk/src/main/java/top/enderherman/netdisk/entity/dto/SessionWebUserDto.java" beforeDir="false" afterPath="$PROJECT_DIR$/netdisk/src/main/java/top/enderherman/netdisk/entity/dto/SessionWebUserDto.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/netdisk/src/main/java/top/enderherman/netdisk/entity/pojo/FileShare.java" beforeDir="false" afterPath="$PROJECT_DIR$/netdisk/src/main/java/top/enderherman/netdisk/entity/pojo/FileShare.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/netdisk/src/main/java/top/enderherman/netdisk/mapper/FileMapper.java" beforeDir="false" afterPath="$PROJECT_DIR$/netdisk/src/main/java/top/enderherman/netdisk/mapper/FileMapper.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/netdisk/src/main/java/top/enderherman/netdisk/mapper/UserMapper.java" beforeDir="false" afterPath="$PROJECT_DIR$/netdisk/src/main/java/top/enderherman/netdisk/mapper/UserMapper.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/netdisk/src/main/java/top/enderherman/netdisk/service/FileService.java" beforeDir="false" afterPath="$PROJECT_DIR$/netdisk/src/main/java/top/enderherman/netdisk/service/FileService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/netdisk/src/main/java/top/enderherman/netdisk/service/UserService.java" beforeDir="false" afterPath="$PROJECT_DIR$/netdisk/src/main/java/top/enderherman/netdisk/service/UserService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/netdisk/src/main/java/top/enderherman/netdisk/service/impl/FileServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/netdisk/src/main/java/top/enderherman/netdisk/service/impl/FileServiceImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/netdisk/src/main/java/top/enderherman/netdisk/service/impl/UserServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/netdisk/src/main/java/top/enderherman/netdisk/service/impl/UserServiceImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/netdisk/src/main/java/top/enderherman/netdisk/task/ScheduledTask.java" beforeDir="false" afterPath="$PROJECT_DIR$/netdisk/src/main/java/top/enderherman/netdisk/task/ScheduledTask.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/netdisk/src/main/resources/application-dev.yml" beforeDir="false" afterPath="$PROJECT_DIR$/netdisk/src/main/resources/application-dev.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/netdisk/src/main/resources/application.properties不用了" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/netdisk/src/main/resources/application.yml" beforeDir="false" afterPath="$PROJECT_DIR$/netdisk/src/main/resources/application.yml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/netdisk/src/main/resources/top/enderherman/netdisk/mapper/FileMapper.xml" beforeDir="false" afterPath="$PROJECT_DIR$/netdisk/src/main/resources/top/enderherman/netdisk/mapper/FileMapper.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/netdisk/src/main/resources/top/enderherman/netdisk/mapper/UserMapper.xml" beforeDir="false" afterPath="$PROJECT_DIR$/netdisk/src/main/resources/top/enderherman/netdisk/mapper/UserMapper.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -100,9 +82,9 @@
       <recent name="top.enderherman.netdisk.mapper" />
     </key>
     <key name="CopyClassDialog.RECENTS_KEY">
+      <recent name="top.enderherman.netdisk.controller" />
       <recent name="top.enderherman.netdisk.entity.enums" />
       <recent name="top.enderherman.netdisk.entity.vo" />
-      <recent name="top.enderherman.netdisk.controller" />
       <recent name="top.enderherman.netdisk.common.utils" />
     </key>
   </component>
@@ -205,7 +187,7 @@
       <workItem from="1742892716546" duration="919000" />
       <workItem from="1742903395461" duration="6464000" />
       <workItem from="1742952638839" duration="2908000" />
-      <workItem from="1742955623117" duration="5541000" />
+      <workItem from="1742955623117" duration="6834000" />
     </task>
     <task id="LOCAL-00001" summary="图片验证码功能完善">
       <created>1734975209542</created>
@@ -249,7 +231,21 @@
       <option name="project" value="LOCAL" />
       <updated>1742759103607</updated>
     </task>
-    <option name="localTasksCounter" value="7" />
+    <task id="LOCAL-00007" summary="1.外部分享, 管理员端功能完成">
+      <created>1742961419616</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1742961419616</updated>
+    </task>
+    <task id="LOCAL-00008" summary="1.外部分享, 管理员端功能完成">
+      <created>1742961475512</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1742961475512</updated>
+    </task>
+    <option name="localTasksCounter" value="9" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -262,6 +258,7 @@
     <MESSAGE value="AOP完成(参数校验与登录校验完成),注册逻辑完成。" />
     <MESSAGE value="1.用户账户接口全部完成&#10;2.AOP完善&#10;3.文件处理初步" />
     <MESSAGE value="1.文件除删除, 分享完所有功能均完成&#10;2.修复移动文件时不能查看同一父级目录下其它文件夹的bug" />
-    <option name="LAST_COMMIT_MESSAGE" value="1.文件除删除, 分享完所有功能均完成&#10;2.修复移动文件时不能查看同一父级目录下其它文件夹的bug" />
+    <MESSAGE value="1.外部分享, 管理员端功能完成" />
+    <option name="LAST_COMMIT_MESSAGE" value="1.外部分享, 管理员端功能完成" />
   </component>
 </project>
