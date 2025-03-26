@@ -55,6 +55,9 @@ public class FileShare implements Serializable {
     private Integer showCount;
 
 
+    /**
+     * 自定义的 数据库内不包含
+     */
     private String fileName;
 
     /**
@@ -76,6 +79,9 @@ public class FileShare implements Serializable {
      * 封面
      */
     private String fileCover;
+
+
+
 
     @Override
     public String toString() {

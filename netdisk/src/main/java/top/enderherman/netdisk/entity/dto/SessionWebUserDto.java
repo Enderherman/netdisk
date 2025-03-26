@@ -8,4 +8,5 @@ public class SessionWebUserDto {
     private String userId;
     private Boolean isAdmin;
     private String avatar;
+
 }

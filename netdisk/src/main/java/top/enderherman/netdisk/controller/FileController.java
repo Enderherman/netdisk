@@ -13,6 +13,7 @@ import org.springframework.web.multipart.MultipartFile;
 import top.enderherman.netdisk.annotation.GlobalInterceptor;
 import top.enderherman.netdisk.annotation.VerifyParam;
 import top.enderherman.netdisk.common.BaseResponse;
+import top.enderherman.netdisk.common.config.AppConfig;
 import top.enderherman.netdisk.common.utils.CopyUtils;
 import top.enderherman.netdisk.common.utils.StringUtils;
 import top.enderherman.netdisk.entity.dto.SessionWebUserDto;
@@ -36,6 +37,8 @@ public class FileController extends ACommonFileController {
 
     @Resource
     private FileService fileService;
+
+
 
 
     /**
@@ -164,7 +167,7 @@ public class FileController extends ACommonFileController {
     public BaseResponse<?> getFolderInfo(HttpSession session,
                                          @VerifyParam(required = true) String path) {
         SessionWebUserDto webUserDto = getUserInfoFromSession(session);
-        return super.getFolderInfo(path, webUserDto.getUserId());
+        return super.getFolderInfo(path, webUserDto.getIsAdmin()?null:webUserDto.getUserId());
     }
 
     /**

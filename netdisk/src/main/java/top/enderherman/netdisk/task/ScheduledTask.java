@@ -29,7 +29,7 @@ public class ScheduledTask {
     private AppConfig appConfig;
 
     /**
-     * 每分钟执行一次，自动删除文件
+     * 每月五号自动删除已缓存文件
      */
     @Scheduled(cron = "0 5 2 5 * ?")
     public void autoDeleteFile() {

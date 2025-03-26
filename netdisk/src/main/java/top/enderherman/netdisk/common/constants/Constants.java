@@ -25,6 +25,8 @@ public class Constants {
 
     public static final String SESSION_KEY = "session_key";
 
+    public static final String SESSION_SHARE_KEY = "session_share_key_";
+
 
     //注册时图片验证码
     public static final String CHECK_CODE_KEY = "check_code_key";

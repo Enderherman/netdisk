@@ -514,6 +514,48 @@
             and del_flag = #{oldDelFlag}
         </if>
     </update>
+    <!-- 添加 （批量插入）-->
+
+    <insert id="insertBatch" parameterType="top.enderherman.netdisk.entity.pojo.FileInfo">
+        INSERT INTO file_info(
+        file_id,
+        user_id,
+        file_md5,
+        file_pid,
+        file_size,
+        file_name,
+        file_cover,
+        file_path,
+        create_time,
+        last_update_time,
+        folder_type,
+        file_category,
+        file_type,
+        status,
+        recovery_time,
+        del_flag
+        )values
+        <foreach collection="list" item="item" separator=",">
+            (
+            #{item.fileId},
+            #{item.userId},
+            #{item.fileMd5},
+            #{item.filePid},
+            #{item.fileSize},
+            #{item.fileName},
+            #{item.fileCover},
+            #{item.filePath},
+            #{item.createTime},
+            #{item.lastUpdateTime},
+            #{item.folderType},
+            #{item.fileCategory},
+            #{item.fileType},
+            #{item.status},
+            #{item.recoveryTime},
+            #{item.delFlag}
+            )
+        </foreach>
+    </insert>
 
 
     <!-- 根据FileIdAndUserId删除-->
@@ -535,6 +577,11 @@
     <delete id="deleteByParam">
         delete from file_info
         <include refid="query_condition"/>
+    </delete>
+    <delete id="deleteFileByUserId">
+        delete
+        from file_info
+        where user_id = #{userId}
     </delete>
 
 

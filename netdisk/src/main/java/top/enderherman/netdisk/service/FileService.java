@@ -97,4 +97,14 @@ public interface FileService {
     void recoverFile(String userId, String fileIds);
 
     void deleteFile(String userId, String fileIds, boolean adminOp);
+
+    /**
+     * 校验路径
+     */
+    void checkRootFilePid(String fileId, String shareUserId, String filePid);
+
+    /**
+     * 保存分享的文件
+     */
+    void saveShare(String fileId, String shareFileIds, String myFolderId, String shareUserId, String userId);
 }

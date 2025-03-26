@@ -12,17 +12,21 @@ import top.enderherman.netdisk.common.exceptions.BusinessException;
 import top.enderherman.netdisk.common.utils.StringUtils;
 import top.enderherman.netdisk.entity.dto.SessionWebUserDto;
 import top.enderherman.netdisk.entity.dto.UserSpaceDto;
+import top.enderherman.netdisk.entity.enums.PageSize;
 import top.enderherman.netdisk.entity.enums.UserStatusEnum;
 import top.enderherman.netdisk.entity.pojo.FileInfo;
 import top.enderherman.netdisk.entity.pojo.User;
 import top.enderherman.netdisk.entity.query.FileQuery;
+import top.enderherman.netdisk.entity.query.SimplePage;
 import top.enderherman.netdisk.entity.query.UserQuery;
+import top.enderherman.netdisk.entity.vo.PaginationResultVO;
 import top.enderherman.netdisk.mapper.FileMapper;
 import top.enderherman.netdisk.mapper.UserMapper;
 import top.enderherman.netdisk.service.EmailCodeService;
 import top.enderherman.netdisk.service.UserService;
 
 import java.util.Date;
+import java.util.List;
 
 @Service("userService")
 public class UserServiceImpl implements UserService {
@@ -41,6 +45,36 @@ public class UserServiceImpl implements UserService {
 
     @Resource
     private AppConfig appConfig;
+
+    /**
+     * 根据条件查询列表
+     */
+    @Override
+    public List<User> findListByParam(UserQuery param) {
+        return this.userMapper.selectList(param);
+    }
+
+    /**
+     * 根据条件查询列表
+     */
+    @Override
+    public Integer findCountByParam(UserQuery param) {
+        return this.userMapper.selectCount(param);
+    }
+
+    /**
+     * 分页查询方法
+     */
+    @Override
+    public PaginationResultVO<User> findListByPage(UserQuery param) {
+        int count = this.findCountByParam(param);
+        int pageSize = param.getPageSize() == null ? PageSize.SIZE15.getSize() : param.getPageSize();
+
+        SimplePage page = new SimplePage(param.getPageNo(), count, pageSize);
+        param.setSimplePage(page);
+        List<User> list = this.findListByParam(param);
+        return new PaginationResultVO<>(count, page.getPageSize(), page.getPageNo(), page.getPageTotal(), list);
+    }
 
     @Override
     @Transactional(rollbackFor = Exception.class)
@@ -105,6 +139,7 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
+    @Transactional(rollbackFor = Exception.class)
     public void resetPwd(String email, String password, String emailCode) {
         //1.校验账号密码以及账号状态
         User user = userMapper.selectByEmail(email);
@@ -128,5 +163,29 @@ public class UserServiceImpl implements UserService {
     public SessionWebUserDto qqLogin(String code) {
         //TODO QQLogin
         return null;
+    }
+
+    @Override
+    public void updateUserStatus(String userId, Integer status) {
+        User userInfo = new User();
+        userInfo.setStatus(status);
+        if(UserStatusEnum.DISABLE.getStatus().equals(status)){
+            userInfo.setUseSpace(0L);
+        }
+        userMapper.updateByUserId(userInfo, userId);
+    }
+
+    @Override
+    @Transactional(rollbackFor = Exception.class)
+    public void changeUserSpace(String userId, Integer changeSpace) {
+        Long space = changeSpace * Constants.MB;
+        userMapper.updateUserSpace(userId, null, space);
+        redisComponent.resetUserSpaceUse(userId);
+    }
+
+    @Override
+    public User getUserInfoByUserId(String userId) {
+        return this.userMapper.selectByUserId(userId);
+
     }
 }

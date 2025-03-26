@@ -15,4 +15,9 @@ public interface UserMapper<T, P> extends BaseMapper<T, P> {
     Integer updateByEmail(@Param("bean") T userUpdate, @Param("email") String email);
 
     Integer updateUserSpace(@Param("userId") String userID, @Param("useSpace") Long useSpace, @Param("totalSpace") Long totalSpace);
+
+    /**
+     * 根据UserId获取对象
+     */
+    T selectByUserId(@Param("userId") String userId);
 }

@@ -52,7 +52,7 @@ spring:
 #    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
 
 admin:
-  email: 1261408331@qq.com
+  email: 1261408331@qq.com,Enderherman@outlook.com
 # qq登陆相关
 qq:
   app:

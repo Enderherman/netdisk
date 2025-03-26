@@ -7,6 +7,7 @@ import top.enderherman.netdisk.common.BaseResponse;
 import top.enderherman.netdisk.common.constants.Constants;
 import top.enderherman.netdisk.common.utils.CopyUtils;
 import top.enderherman.netdisk.common.utils.StringUtils;
+import top.enderherman.netdisk.entity.dto.SessionShareDto;
 import top.enderherman.netdisk.entity.dto.SessionWebUserDto;
 import top.enderherman.netdisk.entity.enums.ResponseCodeEnum;
 import top.enderherman.netdisk.common.exceptions.BusinessException;
@@ -152,16 +153,16 @@ public class ABaseController {
 
     /**
      * 从session里获取用户信息
-     *
-     * @param session gta
-     * @return 登录信息
      */
     protected SessionWebUserDto getUserInfoFromSession(HttpSession session) {
         return (SessionWebUserDto) session.getAttribute(Constants.SESSION_KEY);
     }
 
-//    protected SessionShareDto getSessionShareFromSession(HttpSession session, String shareId) {
-//        SessionShareDto sessionShareDto = (SessionShareDto) session.getAttribute(Constants.SESSION_SHARE_KEY + shareId);
-//        return sessionShareDto;
-//    }
+    /**
+     * 从session里获取文件分享的登录信息
+     */
+    protected SessionShareDto getSessionShareFromSession(HttpSession session, String shareId) {
+        SessionShareDto sessionShareDto = (SessionShareDto) session.getAttribute(Constants.SESSION_SHARE_KEY + shareId);
+        return sessionShareDto;
+    }
 }

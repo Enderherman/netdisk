@@ -558,14 +558,14 @@ public class FileServiceImpl implements FileService {
         updateFileInfo.setDelFlag(FileDeleteFlagEnum.FINAL_DELETE.getFlag());
 
         //3.先删除子集文件
-        if(!dbFileInfoList.isEmpty()){
-            fileMapper.updateFileDelFlagBatch(updateFileInfo,userId,dbFileInfoList,null,
+        if (!dbFileInfoList.isEmpty()) {
+            fileMapper.updateFileDelFlagBatch(updateFileInfo, userId, dbFileInfoList, null,
                     FileDeleteFlagEnum.DELETE.getFlag());
         }
 
         //4.删除父级文件
-        if(!fileInfoList.isEmpty()){
-            fileMapper.updateFileDelFlagBatch(updateFileInfo,userId,null,Arrays.asList(fileIdArray),
+        if (!fileInfoList.isEmpty()) {
+            fileMapper.updateFileDelFlagBatch(updateFileInfo, userId, null, Arrays.asList(fileIdArray),
                     FileDeleteFlagEnum.RECYCLE.getFlag());
         }
 
@@ -579,6 +579,64 @@ public class FileServiceImpl implements FileService {
         UserSpaceDto userSpaceDto = redisComponent.getUserSpace(userId);
         userSpaceDto.setUseSpace(useSpace);
         redisComponent.saveUserSpaceDto(userId, userSpaceDto);
+    }
+
+    /**
+     * 只给看已经分享的 根目录其它的不给看
+     */
+    @Override
+    public void checkRootFilePid(String rootFilePid, String userId, String fileId) {
+        if (StringUtils.isEmpty(fileId)) {
+            throw new BusinessException(ResponseCodeEnum.CODE_600);
+        }
+        if (rootFilePid.equals(fileId)) {
+            return;
+        }
+        checkFilePid(rootFilePid, fileId, userId);
+    }
+
+    /**
+     * 保存分享的文件
+     */
+    @Override
+    public void saveShare(String shareRootFilePid, String shareFileIds, String myFolderId, String shareUserId, String currentUserId) {
+        String[] shareFileIdArray = shareFileIds.split(",");
+        //1.目标目录文件列表
+        FileQuery query = new FileQuery();
+        query.setUserId(currentUserId);
+        query.setFilePid(myFolderId);
+        List<FileInfo> currentFileList = fileMapper.selectList(query);
+        Map<String, FileInfo> currentFileMap = currentFileList.stream().collect(Collectors.toMap(FileInfo::getFileName, Function.identity(), (file1, file2) -> file2));
+        //2.要保存的文件
+        query = new FileQuery();
+        query.setUserId(shareUserId);
+        query.setFileIdArray(shareFileIdArray);
+        List<FileInfo> shareFileList = fileMapper.selectList(query);
+        //3.重命名选择的文件
+        List<FileInfo> copyFileList = new ArrayList<>();
+        Date curDate = new Date();
+        for (FileInfo item : shareFileList) {
+            FileInfo haveFile = currentFileMap.get(item.getFileName());
+            if (haveFile != null) {
+                item.setFileName(StringUtils.rename(item.getFileName()));
+            }
+            findAllSubFile(copyFileList, item, shareUserId, currentUserId, curDate, myFolderId);
+        }
+        fileMapper.insertBatch(copyFileList);
+
+        //4.更新空间
+        Long useSpace = fileMapper.selectUseSpace(currentUserId);
+        User dbUserInfo = userMapper.selectByUserId(currentUserId);
+        if (useSpace > dbUserInfo.getTotalSpace()) {
+            throw new BusinessException(ResponseCodeEnum.CODE_904);
+        }
+        User userInfo = new User();
+        userInfo.setUseSpace(useSpace);
+        userMapper.updateByUserId(userInfo, currentUserId);
+        //5.设置缓存
+        UserSpaceDto userSpaceDto = redisComponent.getUserSpace(currentUserId);
+        userSpaceDto.setUseSpace(useSpace);
+        redisComponent.saveUserSpaceDto(currentUserId, userSpaceDto);
     }
 
     /**
@@ -796,5 +854,53 @@ public class FileServiceImpl implements FileService {
         for (FileInfo fileInfo : fileInfoList) {
             findAllSubFolderFileList(fileList, userId, fileInfo.getUserId(), delFlag);
         }
+    }
+
+    /**
+     * 找到所有的子文件
+     */
+    private void findAllSubFile(List<FileInfo> copyFileList,
+                                FileInfo fileInfo,
+                                String sourceUserId,
+                                String currentUserId,
+                                Date curDate,
+                                String newFilePid) {
+        String sourceFileId = fileInfo.getFileId();
+        fileInfo.setCreateTime(curDate);
+        fileInfo.setLastUpdateTime(curDate);
+        fileInfo.setFilePid(newFilePid);
+        fileInfo.setUserId(currentUserId);
+        String newFileId = StringUtils.getRandomString(Constants.LENGTH_10);
+        fileInfo.setFileId(newFileId);
+        copyFileList.add(fileInfo);
+        //目录的话继续递归
+        if (FileFolderTypeEnum.FOLDER.getType().equals(fileInfo.getFolderType())) {
+            FileQuery query = new FileQuery();
+            query.setFilePid(sourceFileId);
+            query.setUserId(sourceUserId);
+            List<FileInfo> sourceFileList = fileMapper.selectList(query);
+            for (FileInfo item : sourceFileList) {
+                findAllSubFile(copyFileList, item, sourceUserId, currentUserId, curDate, newFileId);
+            }
+        }
+    }
+
+    /**
+     * 校验父级id
+     */
+    private void checkFilePid(String rootFilePid, String fileId, String userId) {
+        FileInfo fileInfo = this.fileMapper.selectByFileIdAndUserId(fileId, userId);
+        if (fileInfo == null) {
+            throw new BusinessException(ResponseCodeEnum.CODE_600);
+        }
+        //不可能分享根目录吧都
+        if (Constants.ZERO_STR.equals(fileInfo.getFilePid())) {
+            throw new BusinessException(ResponseCodeEnum.CODE_600);
+        }
+        //recursion找到分享的父级id
+        if (fileInfo.getFilePid().equals(rootFilePid)) {
+            return;
+        }
+        checkFilePid(rootFilePid, fileInfo.getFilePid(), userId);
     }
 }

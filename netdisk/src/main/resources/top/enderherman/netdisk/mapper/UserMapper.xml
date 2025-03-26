@@ -3,6 +3,99 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="top.enderherman.netdisk.mapper.UserMapper">
 
+    <sql id="base_condition_filed">
+        <if test="query.userId != null and query.userId!=''">
+            and user_id = #{query.userId}
+        </if>
+        <if test="query.nickName != null and query.nickName!=''">
+            and nick_name = #{query.nickName}
+        </if>
+        <if test="query.email != null and query.email!=''">
+            and email = #{query.email}
+        </if>
+        <if test="query.qqOpenId != null and query.qqOpenId!=''">
+            and qq_open_id = #{query.qqOpenId}
+        </if>
+        <if test="query.qqAvatar != null and query.qqAvatar!=''">
+            and qq_avatar = #{query.qqAvatar}
+        </if>
+        <if test="query.password != null and query.password!=''">
+            and password = #{query.password}
+        </if>
+        <if test="query.createTime != null and query.createTime!=''">
+            <![CDATA[ and  create_time=str_to_date(#{query.createTime}, '%Y-%m-%d') ]]>
+        </if>
+        <if test="query.lastLoginTime != null and query.lastLoginTime!=''">
+            <![CDATA[ and  last_login_time=str_to_date(#{query.lastLoginTime}, '%Y-%m-%d') ]]>
+        </if>
+        <if test="query.status != null">
+            and status = #{query.status}
+        </if>
+        <if test="query.useSpace != null">
+            and use_space = #{query.useSpace}
+        </if>
+        <if test="query.totalSpace != null">
+            and total_space = #{query.totalSpace}
+        </if>
+    </sql>
+
+    <!-- 通用查询条件列-->
+    <sql id="query_condition">
+        <where>
+            <include refid="base_condition_filed"/>
+            <if test="query.userIdFuzzy!= null  and query.userIdFuzzy!=''">
+                and user_id like concat('%', #{query.userIdFuzzy}, '%')
+            </if>
+            <if test="query.nickNameFuzzy!= null  and query.nickNameFuzzy!=''">
+                and nick_name like concat('%', #{query.nickNameFuzzy}, '%')
+            </if>
+            <if test="query.emailFuzzy!= null  and query.emailFuzzy!=''">
+                and email like concat('%', #{query.emailFuzzy}, '%')
+            </if>
+            <if test="query.qqOpenIdFuzzy!= null  and query.qqOpenIdFuzzy!=''">
+                and qq_open_id like concat('%', #{query.qqOpenIdFuzzy}, '%')
+            </if>
+            <if test="query.qqAvatarFuzzy!= null  and query.qqAvatarFuzzy!=''">
+                and qq_avatar like concat('%', #{query.qqAvatarFuzzy}, '%')
+            </if>
+            <if test="query.passwordFuzzy!= null  and query.passwordFuzzy!=''">
+                and password like concat('%', #{query.passwordFuzzy}, '%')
+            </if>
+            <if test="query.createTimeStart!= null and query.createTimeStart!=''">
+                <![CDATA[ and  create_time>=str_to_date(#{query.createTimeStart}, '%Y-%m-%d') ]]>
+            </if>
+            <if test="query.createTimeEnd!= null and query.createTimeEnd!=''">
+                <![CDATA[ and  create_time< date_sub(str_to_date(#{query.createTimeEnd},'%Y-%m-%d'),interval -1 day) ]]>
+            </if>
+            <if test="query.lastLoginTimeStart!= null and query.lastLoginTimeStart!=''">
+                <![CDATA[ and  last_login_time>=str_to_date(#{query.lastLoginTimeStart}, '%Y-%m-%d') ]]>
+            </if>
+            <if test="query.lastLoginTimeEnd!= null and query.lastLoginTimeEnd!=''">
+                <![CDATA[ and  last_login_time< date_sub(str_to_date(#{query.lastLoginTimeEnd},'%Y-%m-%d'),interval -1 day) ]]>
+            </if>
+        </where>
+    </sql>
+
+    <!-- 查询集合-->
+    <select id="selectList" resultMap="base_result_map">
+        SELECT
+        <include refid="base_column_list"/>
+        FROM user_info
+        <include refid="query_condition"/>
+        <if test="query.orderBy!=null">
+            order by ${query.orderBy}
+        </if>
+        <if test="query.simplePage!=null">
+            limit #{query.simplePage.start},#{query.simplePage.end}
+        </if>
+    </select>
+
+    <!-- 查询数量-->
+    <select id="selectCount" resultType="java.lang.Integer">
+        SELECT count(1) FROM user_info
+        <include refid="query_condition"/>
+    </select>
+
     <insert id="insert" parameterType="top.enderherman.netdisk.entity.pojo.User">
         INSERT INTO user_info
         <trim prefix="(" suffix=")" suffixOverrides=",">
@@ -123,6 +216,12 @@
         select
         <include refid="base_column_list"/>
         from user_info where nick_name=#{nickName}
+    </select>
+    <!-- 根据PrimaryKey获取对象-->
+    <select id="selectByUserId" resultMap="base_result_map">
+        select
+        <include refid="base_column_list"/>
+        from user_info where user_id=#{userId}
     </select>
 
     <update id="updateByUserId" parameterType="top.enderherman.netdisk.entity.pojo.User">

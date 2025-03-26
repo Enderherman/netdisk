@@ -9,8 +9,11 @@ import top.enderherman.netdisk.common.utils.RedisUtils;
 import top.enderherman.netdisk.entity.dto.DownloadFileDto;
 import top.enderherman.netdisk.entity.dto.UserSpaceDto;
 import top.enderherman.netdisk.entity.pojo.FileInfo;
+import top.enderherman.netdisk.entity.pojo.User;
 import top.enderherman.netdisk.entity.query.FileQuery;
+import top.enderherman.netdisk.entity.query.UserQuery;
 import top.enderherman.netdisk.mapper.FileMapper;
+import top.enderherman.netdisk.mapper.UserMapper;
 
 @Slf4j
 @Component("redisComponent")
@@ -22,10 +25,11 @@ public class RedisComponent {
     @Resource
     private FileMapper<FileInfo, FileQuery> fileMapper;
 
+    @Resource
+    private UserMapper<User, UserQuery> userMapper;
+
     /**
      * 获取系统设置
-     *
-     * @return 系统设置
      */
     public SystemConfig getSystemConfig() {
         SystemConfig systemConfig = (SystemConfig) redisUtils.get(Constants.REDIS_KEY_SYS_SETTING);
@@ -33,15 +37,14 @@ public class RedisComponent {
             systemConfig = new SystemConfig();
             redisUtils.set(Constants.REDIS_KEY_SYS_SETTING, systemConfig);
         }
-
         return systemConfig;
     }
 
     /**
-     * 存储用户已使用空间
+     * 存储对应系统配置
      */
-    public void saveUserSpaceDto(String userId, UserSpaceDto userSpaceDto) {
-        redisUtils.setEx(Constants.REDIS_KEY_USER_SPACE_USE + userId, userSpaceDto, Constants.REDIS_KEY_EXPIRES_DAY);
+    public void saveSystemConfig(SystemConfig systemConfig) {
+        redisUtils.set(Constants.REDIS_KEY_SYS_SETTING, systemConfig);
     }
 
     /**
@@ -63,9 +66,29 @@ public class RedisComponent {
 
             redisUtils.setEx(Constants.REDIS_KEY_USER_SPACE_USE + userId, userSpaceDto, Constants.REDIS_KEY_EXPIRES_DAY);
         }
-
         return userSpaceDto;
     }
+    /**
+     * 存储用户已使用空间
+     */
+    public void saveUserSpaceDto(String userId, UserSpaceDto userSpaceDto) {
+        redisUtils.setEx(Constants.REDIS_KEY_USER_SPACE_USE + userId, userSpaceDto, Constants.REDIS_KEY_EXPIRES_DAY);
+    }
+
+    /**
+     * 重置用户空间
+     */
+    public void resetUserSpaceUse(String userId) {
+        UserSpaceDto spaceDto = new UserSpaceDto();
+        Long useSpace = fileMapper.selectUseSpace(userId);
+        spaceDto.setUseSpace(useSpace);
+
+        User userInfo = userMapper.selectByUserId(userId);
+        spaceDto.setTotalSpace(userInfo.getTotalSpace());
+        redisUtils.setEx(Constants.REDIS_KEY_USER_SPACE_USE + userId, spaceDto, Constants.REDIS_KEY_EXPIRES_DAY);
+    }
+
+
 
     /**
      * 获取临时使用空间
@@ -98,6 +121,7 @@ public class RedisComponent {
 
     /**
      * 存储下载时的code
+     *
      * @param code 50位code
      */
     public void saveDownloadCode(String code, DownloadFileDto fileDto) {
@@ -105,9 +129,11 @@ public class RedisComponent {
     }
 
     /**
-     * 获取对应文件的code
+     * 获取对应下载文件的code
      */
     public DownloadFileDto getDownloadCode(String code) {
         return (DownloadFileDto) redisUtils.get(Constants.REDIS_KEY_DOWNLOAD + code);
     }
+
+
 }
