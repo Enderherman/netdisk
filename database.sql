@@ -9,7 +9,7 @@ create table email_code
     status      tinyint(1)   null comment '0:未使用 1:已使用',
     primary key (email, code)
 )
-    comment '邮箱验证码' charset = utf8mb4;
+    comment '邮箱验证码';
 
 create table file_info
 (
@@ -28,10 +28,10 @@ create table file_info
     file_type        tinyint(1)           null comment ' 1:视频 2:音频  3:图片 4:pdf 5:doc 6:excel 7:txt 8:code 9:zip 10:其他',
     status           tinyint(1)           null comment '0:转码中 1转码失败 2:转码成功',
     recovery_time    datetime             null comment '回收站时间',
-    del_flag         tinyint(1) default 2 null comment '删除标记 0:删除  1:回收站  2:正常 3:彻底删除',
+    del_flag         tinyint(1) default 2 null comment '删除标记 0:删除  1:回收站  2:正常 3: 彻底删除',
     primary key (file_id, user_id)
 )
-    comment '文件信息' charset = utf8mb4;
+    comment '文件信息';
 
 create index idx_create_time
     on file_info (create_time);
@@ -63,7 +63,7 @@ create table file_share
     code        varchar(5)    null comment '提取码',
     show_count  int default 0 null comment '浏览次数'
 )
-    comment '分享信息' charset = utf8mb4;
+    comment '分享信息';
 
 create index idx_file_id
     on file_share (file_id);
@@ -95,5 +95,4 @@ create table user_info
     constraint key_qq_open_id
         unique (qq_open_id)
 )
-    comment '用户信息' charset = utf8mb4;
-
+    comment '用户信息';

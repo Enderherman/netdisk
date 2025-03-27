@@ -86,7 +86,7 @@ public class UserController extends ABaseController {
                                          @VerifyParam(required = true) Integer type) {
         try {
             //1.校验图片验证码
-            if (checkCode.equalsIgnoreCase((String) session.getAttribute(Constants.CHECK_CODE_KEY_EMAIL)))
+            if (!checkCode.equalsIgnoreCase((String) session.getAttribute(Constants.CHECK_CODE_KEY_EMAIL)))
                 throw new BusinessException("图片验证码错误");
             emailCodeService.sendEmailCode(email, type);
             return getSuccessResponse(null);
@@ -124,7 +124,7 @@ public class UserController extends ABaseController {
                                  @VerifyParam(required = true) String checkCode) {
         try {
             //1.校验图片验证码
-            if (checkCode.equalsIgnoreCase((String) session.getAttribute(Constants.CHECK_CODE_KEY)))
+            if (!checkCode.equalsIgnoreCase((String) session.getAttribute(Constants.CHECK_CODE_KEY)))
                 throw new BusinessException("图片验证码错误");
             SessionWebUserDto sessionWebUserDto = userService.login(email, password);
             session.setAttribute(Constants.SESSION_KEY, sessionWebUserDto);

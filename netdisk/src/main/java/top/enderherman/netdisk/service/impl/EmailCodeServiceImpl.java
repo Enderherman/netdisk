@@ -54,7 +54,7 @@ public class EmailCodeServiceImpl implements EmailCodeService {
     @Transactional(rollbackFor = Exception.class)
     public void sendEmailCode(String email, Integer type) {
         //0注册 1找回
-        if (type == Constants.ZERO) {
+        if (type.equals(Constants.ZERO)) {
             User user = userMapper.selectByEmail(email);
             if (user != null) {
                 throw new BusinessException("邮箱已经存在");
@@ -76,8 +76,7 @@ public class EmailCodeServiceImpl implements EmailCodeService {
 
     }
 
-
-    private void send(String toEmail, String code) {
+    void send(String toEmail, String code) {
         try {
             MimeMessage message = javaMailSender.createMimeMessage();
             MimeMessageHelper helper = new MimeMessageHelper(message, true);

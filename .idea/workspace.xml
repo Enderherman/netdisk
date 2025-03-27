@@ -4,12 +4,28 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="6b0197f7-b41b-4bb5-bdae-6fdf354b132e" name="Default Changelist" comment="1.外部分享, 管理员端功能完成">
-      <change afterPath="$PROJECT_DIR$/netdisk/src/main/resources/application-cloud.yml" afterDir="false" />
+    <list default="true" id="6b0197f7-b41b-4bb5-bdae-6fdf354b132e" name="Default Changelist" comment="1.前端页面dist 以及数据库上传&#10;2.更新配置">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/netdisk/src/main/resources/application-dev.yml" beforeDir="false" afterPath="$PROJECT_DIR$/netdisk/src/main/resources/application-dev.yml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/netdisk/src/main/resources/application.properties不用了" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/database.sql" beforeDir="false" afterPath="$PROJECT_DIR$/database.sql" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dist/assets/FileList-e9faaa7d.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dist/assets/Framework-80b5726f.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dist/assets/Login-0656aa12.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dist/assets/Login-63d02a7c.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dist/assets/Main-f20d2c07.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dist/assets/QqLoginCallback-45c18938.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dist/assets/Recycle-a8777b95.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dist/assets/Share-31432105.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dist/assets/Share-d7aecea3.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dist/assets/ShareCheck-2c421c3c.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dist/assets/SysSettings-8c479db7.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dist/assets/UserList-4c82329d.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dist/assets/index-a0ca1600.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dist/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/dist/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/netdisk/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/netdisk/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/netdisk/src/main/java/top/enderherman/netdisk/NetdiskApplication.java" beforeDir="false" afterPath="$PROJECT_DIR$/netdisk/src/main/java/top/enderherman/netdisk/NetdiskApplication.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/netdisk/src/main/java/top/enderherman/netdisk/controller/UserController.java" beforeDir="false" afterPath="$PROJECT_DIR$/netdisk/src/main/java/top/enderherman/netdisk/controller/UserController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/netdisk/src/main/java/top/enderherman/netdisk/service/impl/EmailCodeServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/netdisk/src/main/java/top/enderherman/netdisk/service/impl/EmailCodeServiceImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/netdisk/src/main/resources/application-cloud.yml" beforeDir="false" afterPath="$PROJECT_DIR$/netdisk/src/main/resources/application-cloud.yml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/netdisk/src/main/resources/application.yml" beforeDir="false" afterPath="$PROJECT_DIR$/netdisk/src/main/resources/application.yml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -63,13 +79,16 @@
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
     <property name="jdk.selected.JAVA_MODULE" value="17" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/../../easychat" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="nodejs_package_manager_path" value="npm" />
     <property name="project.structure.last.edited" value="Project" />
     <property name="project.structure.proportion" value="0.15565032" />
     <property name="project.structure.side.proportion" value="0.14084506" />
     <property name="settings.editor.selected.configurable" value="MavenSettings" />
     <property name="vue.rearranger.settings.migration" value="true" />
+  </component>
+  <component name="Push.Settings">
+    <option name="SHOW_DETAILS_PANEL" value="false" />
   </component>
   <component name="ReactorSettings">
     <option name="notificationShown" value="true" />
@@ -98,19 +117,6 @@
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration default="true" type="ArquillianTestNG" factoryName="" nameIsGenerated="true">
-      <option name="arquillianRunConfiguration">
-        <value>
-          <option name="containerStateName" value="" />
-        </value>
-      </option>
-      <option name="TEST_OBJECT" value="CLASS" />
-      <properties />
-      <listeners />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
@@ -187,7 +193,9 @@
       <workItem from="1742892716546" duration="919000" />
       <workItem from="1742903395461" duration="6464000" />
       <workItem from="1742952638839" duration="2908000" />
-      <workItem from="1742955623117" duration="6834000" />
+      <workItem from="1742955623117" duration="14384000" />
+      <workItem from="1743043793196" duration="601000" />
+      <workItem from="1743059597237" duration="443000" />
     </task>
     <task id="LOCAL-00001" summary="图片验证码功能完善">
       <created>1734975209542</created>
@@ -245,7 +253,21 @@
       <option name="project" value="LOCAL" />
       <updated>1742961475512</updated>
     </task>
-    <option name="localTasksCounter" value="9" />
+    <task id="LOCAL-00009" summary="1.外部分享, 管理员端功能完成">
+      <created>1742962548754</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1742962548754</updated>
+    </task>
+    <task id="LOCAL-00010" summary="1.前端页面dist 以及数据库上传&#10;2.更新配置">
+      <created>1742962718199</created>
+      <option name="number" value="00010" />
+      <option name="presentableId" value="LOCAL-00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1742962718199</updated>
+    </task>
+    <option name="localTasksCounter" value="11" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -259,6 +281,7 @@
     <MESSAGE value="1.用户账户接口全部完成&#10;2.AOP完善&#10;3.文件处理初步" />
     <MESSAGE value="1.文件除删除, 分享完所有功能均完成&#10;2.修复移动文件时不能查看同一父级目录下其它文件夹的bug" />
     <MESSAGE value="1.外部分享, 管理员端功能完成" />
-    <option name="LAST_COMMIT_MESSAGE" value="1.外部分享, 管理员端功能完成" />
+    <MESSAGE value="1.前端页面dist 以及数据库上传&#10;2.更新配置" />
+    <option name="LAST_COMMIT_MESSAGE" value="1.前端页面dist 以及数据库上传&#10;2.更新配置" />
   </component>
 </project>

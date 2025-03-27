@@ -4,7 +4,7 @@
     <modelVersion>4.0.0</modelVersion>
     <groupId>top.enderherman</groupId>
     <artifactId>netdisk</artifactId>
-    <version>0.0.1-SNAPSHOT</version>
+    <version>0.0.2-SNAPSHOT</version>
     <name>netdisk</name>
     <description>Demo project for Spring Boot</description>
     <properties>
@@ -142,7 +142,7 @@
                 <version>${spring-boot.version}</version>
                 <configuration>
                     <mainClass>top.enderherman.netdisk.NetdiskApplication</mainClass>
-                    <skip>true</skip>
+                    <skip>false</skip>
                 </configuration>
                 <executions>
                     <execution>
